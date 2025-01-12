@@ -1,0 +1,8 @@
+rules:
+  - pattern: 'kafka.connect<type=(.+), client-id=(.+), connector=(.+), task=(.+)><>([a-zA-Z_]+)'
+    name: kafka_connect_$1_$5
+    type: GAUGE
+    help: "Kafka Connect $1 $5"
+    labels:
+      connector: "$3"
+      task: "$4"

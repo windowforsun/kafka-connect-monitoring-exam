@@ -1,0 +1,19 @@
+{
+  "name": "cdc-outbox",
+  "config": {
+    "tasks.max" : "1",
+    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+    "database.hostname": "exam-db",
+    "database.port": "3306",
+    "database.user": "root",
+    "database.password": "root",
+    "database.server.name": "exam-db",
+    "database.history.kafka.topic": "cdc-outbox",
+    "database.history.kafka.bootstrap.servers": "kafka:9092",
+    "database.allowPublicKeyRetrieval" : "true",
+    "tombstones.on.delete" : "false",
+    "table.include.list": "exam.test_table",
+    "value.converter" : "org.apache.kafka.connect.storage.StringConverter",
+    "key.converter" : "org.apache.kafka.connect.storage.StringConverter"
+  }
+}

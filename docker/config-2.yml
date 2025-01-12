@@ -1,0 +1,10 @@
+---
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+whitelistObjectNames: ["org.apache.kafka.connect:*"]
+rules:
+  - pattern: 'kafka.connect<type=(.+), connector=(.+), task=(.+)><>Value'
+    name: 'kafka_connect_$1_$2_$3'
+    labels:
+      connector: "$2"
+      task: "$3"

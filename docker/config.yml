@@ -1,0 +1,69 @@
+# config.yml
+# if exports all metrics
+#rules:
+#  - pattern: ".*"
+
+# if exports kafka connect metrics
+#whitelistObjectNames: ["org.apache.kafka.connect:*"]
+#rules:
+#  - pattern: 'kafka.connect<type=(.+), connector=(.+), task=(.+)><>Value'
+#    name: 'kafka_connect_$1_$2_$3'
+#    labels:
+#      connector: "$2"
+#      task: "$3"
+
+rules:
+  # Kafka Connect Worker metrics
+  - pattern: "kafka.connect<type=worker-metrics>([^,]+),*"
+    name: "kafka_connect_worker_metrics_$1"
+    labels:
+      metric: "$1"
+    help: "Kafka Connect Worker metrics"
+    type: GAUGE
+
+  # Kafka Connect Connector metrics
+  - pattern: "kafka.connect<type=connector-metrics>([^,]+),*"
+    name: "kafka_connect_connector_metrics_$1"
+    labels:
+      metric: "$1"
+    help: "Kafka Connect Connector metrics"
+    type: GAUGE
+
+  # Kafka Connect Task metrics
+  - pattern: "kafka.connect<type=task-metrics>([^,]+),*"
+    name: "kafka_connect_task_metrics_$1"
+    labels:
+      metric: "$1"
+    help: "Kafka Connect Task metrics"
+    type: GAUGE
+
+  # Deny all other metrics
+  - pattern: ".*"
+    action: "deny"
+
+#rules:
+#  # Kafka Connect metrics
+#  - pattern: "kafka.connect<type=worker-metrics>(.*)"
+#    name: "kafka_connect_worker_metrics_$1"
+#    labels:
+#      type: "worker"
+#    help: "Kafka Connect Worker metrics"
+#    type: GAUGE
+#
+#  - pattern: "kafka.connect<type=connector-metrics>(.*)"
+#    name: "kafka_connect_connector_metrics_$1"
+#    labels:
+#      type: "connector"
+#    help: "Kafka Connect Connector metrics"
+#    type: GAUGE
+#
+#  - pattern: "kafka.connect<type=task-metrics>(.*)"
+#    name: "kafka_connect_task_metrics_$1"
+#    labels:
+#      type: "task"
+#    help: "Kafka Connect Task metrics"
+#    type: GAUGE
+#
+#  # Optionally, you can exclude all other JMX metrics by adding a default rule:
+#  - pattern: ".*"
+#    action: "deny"

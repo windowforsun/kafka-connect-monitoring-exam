@@ -1,0 +1,9 @@
+{
+  "name": "exam-file-source",
+  "config": {
+    "connector.class": "org.apache.kafka.connect.file.FileStreamSourceConnector",
+    "tasks.max": "1",
+    "file": "/data/file-source-input.txt",
+    "topic" : "file-source-topic"
+  }
+}
